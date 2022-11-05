@@ -1,0 +1,153 @@
+listSug = []
+listComp = []
+listRep = []
+start = 0
+ind = '  '#espaço pra deixar o output tudo formatado tipo markdown
+
+print('Hello, welcome to X Company\'s anonymous feedback space! What do you want to do now?')
+while (start != '4'): # se já começou com 4 ele finaliza
+  print("\n# OPTIONS\n\n  1. Suggest;\n  2. Compliment;\n  3. Report;\n  4. End session;\n")
+  start = input("> Select a option: ")#o usuer vai escolher se quer dar sug, dar elog ou fazr denuncia
+  while not (start == '1' or start == '2' or start == '3' or start == '4'):#enquanto a opção for invalida
+    print()
+    start = input('> Please enter a valid option: ')#escolher novamente entre dar sug, mostrar elog, den ou finalizar.
+
+#SUGESTÃO
+  
+  if start == '1':#se ele escolher FAZER UMA SUGESTÃO
+    print()
+    print(ind+'## SUGGEST\n')
+    optSug = 0
+    while not(optSug == '5'):
+      print(ind*2+'### OPTIONS\n')
+      print(ind*3+'1. Add a suggestion;\n'+ind*3+'2. Show suggestions;\n'+ind*3+'3. Delete a suggestion;\n'+ind*3+'4. Clean all suggestions;\n'+ind*3+'5. Return;\n')
+      optSug = input(ind*2+'> Select a option: ') #o user escolhe se quer fazer mais uma sug, mostrar as sug ou voltar
+      while not(optSug >= '1' and optSug <= '5'):# enquanto optSug não válido 
+        optSug = input('\n' + ind*2+'> Please enter a valid option: ')#escolher novamente entre dar +1sug, mostrar sug ou voltar
+      if optSug == '1':
+        print('\n'+ind*3+'#### SUGGEST\n')
+        sug = input(ind*4+'> Enter your suggestion: ')
+        listSug.append(sug)
+        print('\n'+ind*4+'Thank you for your suggestion!')
+        input('\nPress enter to return...\n')
+      if optSug == '2': #o usuario apertou pra mostrar sugestões
+        print('\n'+ind*3+'#### MY SUGGESTIONS\n')
+        for idx in range(len(listSug)): #PARA MOSTRAR A LISTA
+          print(ind*4+"{}. {}".format(idx+1, listSug[idx]))
+        input('\nPress enter to return...\n')
+      elif optSug == '3':  
+        print('\n'+ind*3+'#### DELETE A SUGGESTION\n')
+        if len(listSug) != 0:
+          for idx in range(len(listSug)): #PARA MOSTRAR A LISTA
+            print(ind*4+"{}. {}".format(idx+1, listSug[idx]))
+          idxSug = int(input('\n'+ind*4+'> Enter the number associated whith the item you want to delete: '))#escolher qual item da lista deseja apagar
+          while idxSug > len(listSug):
+            idxSug = int(input(ind*4+'> Invalid option! Enter a number associated a list item!: '))#escolher NOVAMENTE qual item da lista deseja apagar
+          del listSug[idxSug-1]
+          print('\n'+ind*4+'Suggestion {} deleted!\n'.format(idxSug))
+          input('\nPress enter to return...\n')
+        else:
+          print(ind*3+'You haven\'t added any suggestions yet!')
+          input('\nPress enter to return...\n')
+      elif optSug == '4':
+        if len(listComp) != 0:
+          print('\n'+ind*3+'#### CLEAN SUGGESTIONS\n')
+          listSug.clear()
+          print(ind*4+'You\'ve deleted all suggestions!')
+          input('\nPress enter to return...\n')
+        else:
+          print('\n'+ind*3+'You haven\'t added any reports yet!')
+          input('\nPress enter to return...\n')
+
+#ELEGIO
+
+  elif start == '2':#se ele escolher FAZER UM ELOGIO
+    print()
+    print(ind+'## COMPLIMENT\n')
+    optComp = 0
+    while not(optComp == '5'):
+      print(ind*2+'### OPTIONS\n')
+      print(ind*3+'1. Add a complimet;\n'+ind*3+'2. Show compliments;\n'+ind*3+'3. Delete a compliment;\n'+ind*3+'4. Clean all compliments;\n'+ind*3+'5. Return;\n')
+      optComp = input(ind*2+'> Select a option: ') #o user escolhe se quer fazer mais um elog, mostrar os elog ou voltar
+      while not(optComp >= '1' and optComp <= '5'):# enquanto optComp não válido 
+        optComp = input('\n' + ind*2+'> Please enter a valid option: ')#escolher novamente entre dar +1comp, mostrar comp ou voltar
+      if optComp == '1':
+        print('\n'+ind*3+'#### COMPLIMENT\n')
+        comp = input(ind*4+'> Enter your compliment: ')
+        listComp.append(comp)
+        print('\n'+ind*4+'Thank you for your compliment!')
+        input('\nPress enter to return...\n')
+      if optComp == '2': #o usuario apertou pra mostrar elogios
+        print('\n'+ind*3+'#### MY COMPLIMENTS\n')
+        for idx in range(len(listComp)): #PARA MOSTRAR A LISTA
+          print(ind*4+"{}. {}".format(idx+1, listComp[idx]))
+        input('\nPress enter to return...\n')
+      elif optComp == '3':
+        if len(listComp) != 0:
+          print('\n'+ind*3+'#### DELETE A COMPLIMENT\n')
+          for idx in range(len(listComp)): #PARA MOSTRAR A LISTA
+            print(ind*4+"{}. {}".format(idx+1, listComp[idx]))
+          idxComp = int(input('\n'+ind*4+'> Enter the number associated whith the item you want to delete: '))#escolher qual item da lista deseja apagar
+          while idxComp > len(listComp):
+            idxComp = int(input(ind*4+'> Invalid option! Enter a number asscociated with a list item!: '))#escolher NOVAMENTE qual item da lista deseja apagar
+          del listComp[idxComp-1]
+          print('\n'+ind*4+'Compliment {} deleted!\n'.format(idxComp))
+          input('\nPress enter to retunr...\n')
+        else:
+          print('\n'+ind*3+'You haven\'t added any compliments yet!')
+          input('\nPress enter to return...\n')
+      elif optComp == '4':
+        if len(listComp) != 0:
+          print('\n'+ind*3+'#### CLEAN COMPLIMENTS\n')
+          listComp.clear()
+          print(ind*4+'You\'ve deleted all compliments!')
+          input('\nPress enter to return...\n')
+        else:
+          print('\n'+ind*3+'You haven\'t added any compliments yet!')
+          input('\nPress enter to return...\n')
+        
+#DENÚNCIA 
+  elif start == '3':
+    print()
+    print(ind+'## REPORT\n')
+    optRep = 0
+    while not(optRep == '5'):
+      print(ind*2+'### OPTIONS\n')
+      print(ind*3+'1. Add a report;\n'+ind*3+'2. Show reports;\n'+ind*3+'3. Delete a report;\n'+ind*3+'4. Clean all reports;\n'+ind*3+'5. Return;\n')
+      optRep = input(ind*2+'> Select a option: ') #o user escolhe se quer fazer mais uma den, mostrar as den ou voltar
+      while not(optRep >= '1' and optRep <= '5'):# enquanto optRep não válido 
+        optRep = input('\n' + ind*2+'> Please enter a valid option: ')#escolher novamente entre dar +1den, mostrar den ou voltar
+      if optRep == '1':
+        print('\n'+ind*3+'#### REPORT\n')
+        rep = input(ind*4+'> Enter your report: ')
+        listRep.append(rep)
+        print('\n'+ind*4+'Thank your for letting us know!')
+        input('\nPress enter to return...\n')
+      if optRep == '2': #o usuario apertou pra mostrar denúncias
+        print('\n'+ind*3+'#### MY REPORTS\n')
+        for idx in range(len(listRep)): #PARA MOSTRAR A LISTA
+          print(ind*4+"{}. {}".format(idx+1, listRep[idx]))
+        input('\nPress enter to return...\n')
+      elif optRep == '3': 
+        if len(listRep) != 0:
+          print('\n'+ind*3+'#### DELETE A REPORT\n')
+          idxRep = int(input(ind*4+'> Enter the number associated whith the item you want to delete: '))#escolher qual item da lista deseja apagar
+          while idxRep > len(listRep):
+            idxRep = int(input(ind*4+'> Invalid option! Enter a number asscociated with a list item!: '))#escolher NOVAMENTE qual item da lista deseja apagar
+          del listRep[idxRep-1]
+          print('\n'+ind*4+'Report {} deleted!:\n'.format(idxRep))
+          input('\nPress enter to return...\n')
+        else:
+          print('\n'+ind*3+'You haven\'t added any reports yet!')
+          input('\nPress enter to return...\n')
+      elif optRep == '4':
+        if len(listRep) != 0:
+          print('\n'+ind*3+'#### CLEAN REPORTS\n')
+          listRep.clear()
+          print(ind*4+'You\'ve deleted all reports!')
+          input('\nPress enter to return...\n')
+        else:
+          print('\n'+ind*3+'You haven\'t added any reports yet!')
+          input('\nPress enter to return...\n')
+print('\n# FINISHED \n\nSession ended! You\'ve made:\n\n  - {} Sugestion(s);\n  - {} Compliment(s);\n  - {} Report(s);'.format(len(listSug), len(listComp), len(listRep)))
+print('\nThank you for your contribution, your feedback is really important to our company\'s improviment :).')
